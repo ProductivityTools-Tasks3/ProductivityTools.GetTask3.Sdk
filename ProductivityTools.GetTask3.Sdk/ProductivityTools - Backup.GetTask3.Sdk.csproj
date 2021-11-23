@@ -1,15 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="IdentityModel" Version="5.2.0" />
     <PackageReference Include="ProductivityTools.GetTask3.Contract" Version="0.0.2" />
-    <PackageReference Include="ProductivityTools.MasterConfiguration" Version="2.0.5" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.14.1" />
-    <PackageReference Include="System.Net.Http.Formatting.Extension" Version="5.2.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProductivityTools.GetTask3.Sdk.HttpClient\ProductivityTools.GetTask3.Sdk.HttpClient.csproj">

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityTools.GetTask3.Sdk", "ProductivityTools.GetTask3.Sdk\ProductivityTools.GetTask3.Sdk.csproj", "{8B33CB2B-CB80-47BE-87DE-507F27B9DAB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityTools.GetTask3.Sdk.HttpClient", "ProductivityTools.GetTask3.Sdk.HttpClient\ProductivityTools.GetTask3.Sdk.HttpClient.csproj", "{1FC2A38C-E453-4A96-A9AB-5ED970067271}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8B33CB2B-CB80-47BE-87DE-507F27B9DAB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B33CB2B-CB80-47BE-87DE-507F27B9DAB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B33CB2B-CB80-47BE-87DE-507F27B9DAB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC2A38C-E453-4A96-A9AB-5ED970067271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC2A38C-E453-4A96-A9AB-5ED970067271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC2A38C-E453-4A96-A9AB-5ED970067271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC2A38C-E453-4A96-A9AB-5ED970067271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
