@@ -11,20 +11,20 @@ namespace ProductivityTools.GetTask3.Sdk
         private readonly string Address;
         private readonly GetTaskHttpClient GetTaskHttpClient;
 
-        public TaskClient(string address)
+        public TaskClient(string address, Action<string> log)
         {
             this.Address = address;
-            GetTaskHttpClient = new GetTaskHttpClient(this.Address);
+            GetTaskHttpClient = new GetTaskHttpClient(this.Address, log);
         }
 
         public async Task<object> Start(int elementId, Action<string> log)
         {
-            return await GetTaskHttpClient.Post2<object>(Consts.Task, Consts.Start, new StartRequest() { ElementId = elementId }, log);
+            return await GetTaskHttpClient.Post2<object>(Consts.Task, Consts.Start, new StartRequest() { ElementId = elementId });
         }
 
-        public async Task<ElementView> GetStructure(int? currentNode, string path, Action<string> log)
+        public async Task<ElementView> GetStructure(int? currentNode, string path)
         {
-            var rootElement = await GetTaskHttpClient.Post2<ElementView>(Consts.Task, Consts.TodayList, new ListRequest() { ElementId = currentNode, Path = path },log);
+            var rootElement = await GetTaskHttpClient.Post2<ElementView>(Consts.Task, Consts.TodayList, new ListRequest() { ElementId = currentNode, Path = path });
             return rootElement;
         }
     }

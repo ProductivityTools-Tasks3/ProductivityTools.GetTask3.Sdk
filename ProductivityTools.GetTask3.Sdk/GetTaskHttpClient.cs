@@ -16,14 +16,16 @@ namespace ProductivityTools.GetTask3.Sdk
 
 
         private readonly string URL;
+        private readonly Action<String> Log;
 
-        public GetTaskHttpClient(string url)
+        public GetTaskHttpClient(string url, Action<string> log)
         {
-            this.URL = url; 
+            this.URL = url;
+            this.Log = log;
         }
 
-        private static string token;
-        private static string Token
+        private string token;
+        private string Token
         {
             get
             {
@@ -45,7 +47,7 @@ namespace ProductivityTools.GetTask3.Sdk
             }
         }
 
-        private static void SetNewAccessToken()
+        private void SetNewAccessToken()
         {
             IConfigurationRoot configuration = null;
             try
@@ -61,18 +63,18 @@ namespace ProductivityTools.GetTask3.Sdk
 
 
 
-            Console.WriteLine("token is empty need to call identity server");
+            Log("token is empty need to call identity server");
             var client = new System.Net.Http.HttpClient();
 
             var disco = client.GetDiscoveryDocumentAsync("https://identityserver.productivitytools.tech:8010/").Result;
-            Console.WriteLine($"Discovery server{disco}");
+            Log($"Discovery server{disco}");
             if (disco.IsError)
             {
                 Console.WriteLine(disco.Error);
             }
 
-            Console.WriteLine("GetTask3Cmdlet secret");
-            Console.WriteLine(configuration["GetTask3Cmdlet"]);
+            Log("GetTask3Cmdlet secret");
+            Log(configuration["GetTask3Cmdlet"]);
 
             var tokenResponse = client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
@@ -83,25 +85,25 @@ namespace ProductivityTools.GetTask3.Sdk
                 Scope = "GetTask3.API"
             }).Result;
 
-            Console.WriteLine("Token response pw:");
-            Console.WriteLine(tokenResponse.AccessToken);
-            Console.WriteLine(tokenResponse.Error);
+            Log("Token response pw:");
+            Log(tokenResponse.AccessToken);
+            Log(tokenResponse.Error);
 
             if (tokenResponse.IsError)
             {
-                Console.WriteLine(tokenResponse.Error);
+                Log(tokenResponse.Error);
             }
 
-            Console.WriteLine(tokenResponse.Json);
+            Log(tokenResponse.Json.ToString());
             token = tokenResponse.AccessToken;
         }
 
 
 
-        public async Task<T> Post2<T>(string controller, string action, object obj, Action<string> log)
+        public async Task<T> Post2<T>(string controller, string action, object obj)
         {
-            log($"Performing Post under address {URL}");
-             var client = new System.Net.Http.HttpClient(new LoggingHandler(new HttpClientHandler(), log));
+            Log($"Performing Post under address {URL}");
+             var client = new System.Net.Http.HttpClient(new LoggingHandler(new HttpClientHandler(), Log));
             client.BaseAddress = new Uri(URL + controller + "/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
