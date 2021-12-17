@@ -12,9 +12,15 @@ namespace ProductivityTools.GetTask3.Sdk
     public class GetTaskHttpClient
     {
         //static string URL = "http://apigettask3.productivitytools.tech:8040/api/";// Consts.EndpointAddress;
-        static string URL = "http://localhost:5513/api/";// Consts.EndpointAddress;
+        //static string URL = "http://localhost:5513/api/";// Consts.EndpointAddress;
 
 
+        private readonly string URL;
+
+        public GetTaskHttpClient(string url)
+        {
+            this.URL = url; 
+        }
 
         private static string token;
         private static string Token
@@ -92,7 +98,7 @@ namespace ProductivityTools.GetTask3.Sdk
 
 
 
-        public static async Task<T> Post2<T>(string controller, string action, object obj, Action<string> log)
+        public async Task<T> Post2<T>(string controller, string action, object obj, Action<string> log)
         {
             log($"Performing Post under address {URL}");
              var client = new System.Net.Http.HttpClient(new LoggingHandler(new HttpClientHandler(), log));
