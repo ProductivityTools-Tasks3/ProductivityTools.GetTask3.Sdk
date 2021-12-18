@@ -1,4 +1,5 @@
-﻿using ProductivityTools.GetTask3.Contract;
+﻿using Microsoft.Extensions.Configuration;
+using ProductivityTools.GetTask3.Contract;
 using ProductivityTools.GetTask3.Contract.Requests;
 using ProductivityTools.GetTask3.Sdk;
 using System;
@@ -11,10 +12,10 @@ namespace ProductivityTools.GetTask3.Sdk
         private readonly string Address;
         private readonly GetTaskHttpClient GetTaskHttpClient;
 
-        public TaskClient(string address, Action<string> log)
+        public TaskClient(string address, IConfigurationRoot configuration, Action<string> log)
         {
             this.Address = address;
-            GetTaskHttpClient = new GetTaskHttpClient(this.Address, log);
+            GetTaskHttpClient = new GetTaskHttpClient(this.Address, configuration, log);
         }
 
         public async Task<object> Start(int elementId, Action<string> log)

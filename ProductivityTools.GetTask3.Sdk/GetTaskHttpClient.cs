@@ -17,11 +17,14 @@ namespace ProductivityTools.GetTask3.Sdk
 
         private readonly string URL;
         private readonly Action<String> Log;
+        IConfigurationRoot Configuration;
 
-        public GetTaskHttpClient(string url, Action<string> log)
+        public GetTaskHttpClient(string url, IConfigurationRoot configuration, Action<string> log)
         {
             this.URL = url;
             this.Log = log;
+            this.Configuration = configuration;
+            
         }
 
         private string token;
@@ -49,17 +52,19 @@ namespace ProductivityTools.GetTask3.Sdk
 
         private void SetNewAccessToken()
         {
-            IConfigurationRoot configuration = null;
-            try
-            {
-                configuration = new ConfigurationBuilder().AddMasterConfiguration("ProductivityTools.GetTask3.Client.json").Build();
-            }
-            catch (Exception ex)
-            {
+            //IConfigurationRoot configuration = null;
+            //try
+            //{
+            //    configuration = new ConfigurationBuilder()
+            //        .AddMasterConfiguration("ProductivityTools.GetTask3.Client.json")
+            //        .Build();
+            //}
+            //catch (Exception ex)
+            //{
 
-                Console.WriteLine(ex.Message);
-                throw;
-            }
+            //    Console.WriteLine(ex.Message);
+            //    throw;
+            //}
 
 
 
@@ -70,18 +75,18 @@ namespace ProductivityTools.GetTask3.Sdk
             Log($"Discovery server{disco}");
             if (disco.IsError)
             {
-                Console.WriteLine(disco.Error);
+                Log(disco.Error);
             }
 
             Log("GetTask3Cmdlet secret");
-            Log(configuration["GetTask3Cmdlet"]);
+            Log(Configuration["GetTask3Cmdlet"]);
 
             var tokenResponse = client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = disco.TokenEndpoint,
 
                 ClientId = "GetTask3Cmdlet",
-                ClientSecret = configuration["GetTask3Cmdlet"],
+                ClientSecret = Configuration["GetTask3Cmdlet"],
                 Scope = "GetTask3.API"
             }).Result;
 
