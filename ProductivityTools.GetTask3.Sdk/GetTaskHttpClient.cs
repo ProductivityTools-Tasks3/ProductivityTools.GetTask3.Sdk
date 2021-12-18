@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
+
 namespace ProductivityTools.GetTask3.Sdk
 {
     public class GetTaskHttpClient
@@ -57,6 +58,7 @@ namespace ProductivityTools.GetTask3.Sdk
             //{
             //    configuration = new ConfigurationBuilder()
             //        .AddMasterConfiguration("ProductivityTools.GetTask3.Client.json")
+            //        .AddEnvironmentVariables
             //        .Build();
             //}
             //catch (Exception ex)
