@@ -5,6 +5,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 
@@ -119,7 +120,7 @@ namespace ProductivityTools.GetTask3.Sdk
             HttpResponseMessage response = await client.PostAsJsonAsync(action, obj);
             if (response.IsSuccessStatusCode)
             {
-                T result = await response.Content.ReadAsAsync<T>();
+                T result = await response.Content.ReadFromJsonAsync<T>();
                 return result;
             }
             throw new Exception(response.ReasonPhrase);

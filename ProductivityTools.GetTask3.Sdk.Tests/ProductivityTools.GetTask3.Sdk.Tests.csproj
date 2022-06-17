@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="appsettings.Example.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="appsettings.json">
       <Generator></Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
