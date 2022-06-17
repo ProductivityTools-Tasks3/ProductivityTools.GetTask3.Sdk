@@ -18,13 +18,13 @@ namespace ProductivityTools.GetTask3.Sdk
 
         private readonly string URL;
         private readonly Action<String> Log;
-        IConfigurationRoot Configuration;
+        string ClientSecret;
 
-        public GetTaskHttpClient(string url, IConfigurationRoot configuration, Action<string> log)
+        public GetTaskHttpClient(string url, string clientSecret, Action<string> log)
         {
             this.URL = url;
             this.Log = log;
-            this.Configuration = configuration;
+            this.ClientSecret= clientSecret;
             
         }
 
@@ -81,14 +81,14 @@ namespace ProductivityTools.GetTask3.Sdk
             }
 
             Log("GetTask3Cmdlet secret");
-            Log(Configuration["GetTask3Cmdlet"]);
+            Log(ClientSecret);
 
             var tokenResponse = client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = disco.TokenEndpoint,
 
                 ClientId = "GetTask3Cmdlet",
-                ClientSecret = Configuration["GetTask3Cmdlet"],
+                ClientSecret = ClientSecret,
                 Scope = "GetTask3.API"
             }).Result;
 
