@@ -12,7 +12,8 @@ namespace ProductivityTools.GetTask3.Sdk.Tests
             var builder = new ConfigurationBuilder().AddJsonFile("appSettings.json", optional:false);
             var configuration = builder.Build();
             var password = configuration["password"];
-            var taskClient = new TaskClient("http://localhost:5513/api/",password, (x) => { System.Console.WriteLine(x); });
+            var webapikey = configuration["WebApiKey"];
+            var taskClient = new TaskClient("http://localhost:5513/api/",webapikey, password, (x) => { System.Console.WriteLine(x); });
             var result = taskClient.GetStructure(null, string.Empty).Result;
         }
     }

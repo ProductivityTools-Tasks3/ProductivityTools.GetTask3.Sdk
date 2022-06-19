@@ -12,10 +12,10 @@ namespace ProductivityTools.GetTask3.Sdk
         private readonly string Address;
         private readonly GetTaskHttpClient GetTaskHttpClient;
 
-        public TaskClient(string address, string clientSecret, Action<string> log)
+        public TaskClient(string address, string webapikey, string clientSecret, Action<string> log)
         {
             this.Address = address;
-            GetTaskHttpClient = new GetTaskHttpClient(this.Address, clientSecret, log);
+            GetTaskHttpClient = new GetTaskHttpClient(this.Address, webapikey, clientSecret, log);
         }
 
         public async Task<object> Start(int elementId, Action<string> log)

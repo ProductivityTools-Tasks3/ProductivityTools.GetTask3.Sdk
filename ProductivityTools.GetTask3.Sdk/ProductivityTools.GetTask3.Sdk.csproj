@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="ProductivityTools.GetTask3.Contract" Version="0.0.17" />
     <PackageReference Include="ProductivityTools.MasterConfiguration" Version="2.0.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.19.0" />
