@@ -56,7 +56,7 @@ namespace ProductivityTools.GetTask3.Sdk
         private async Task<string> GetCustomToken()
         {
              var HttpClient = new HttpClient();
-            Uri url = new Uri(@"http://127.0.0.1:5513/api/CustomToken/Get");
+            Uri url = new Uri($"{this.URL}CustomToken/Get");
 
             HttpClient.DefaultRequestHeaders.Accept.Clear();
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
