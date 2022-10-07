@@ -15,6 +15,8 @@ namespace ProductivityTools.GetTask3.Sdk.Tests
             var webapikey = configuration["WebApiKey"];
             var taskClient = new TaskClient("http://localhost:5513/api/",webapikey, (x) => { System.Console.WriteLine(x); });
             var result = taskClient.GetStructure(null, string.Empty).Result;
+
+            var result2 = taskClient.GetThisWeekFinished(null, string.Empty).Result;
         }
     }
 }
