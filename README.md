@@ -27,3 +27,6 @@ var taskClient = new TaskClient("http://localhost:5513/api/",webapikey , (x) => 
 Currently SDK exposes methods:
 - GetStructure
 - Start
+
+
+ ## Authorization Code Grant
