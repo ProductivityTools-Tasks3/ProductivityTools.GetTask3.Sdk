@@ -30,3 +30,5 @@ Currently SDK exposes methods:
 
 
  ## Authorization Code Grant
+
+ - We perform a call from service to https://apigettask3.productivitytools.top:8040/api/CustomToken/Get
