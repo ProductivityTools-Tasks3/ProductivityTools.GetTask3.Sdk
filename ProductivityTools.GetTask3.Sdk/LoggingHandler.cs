@@ -22,8 +22,10 @@ namespace ProductivityTools.GetTask3.Sdk
             Log(request.ToString());
             if (request.Content != null)
             {
+                Log("Content:");
                 Log(await request.Content.ReadAsStringAsync());
             }
+            Log("");
             Log("");
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
