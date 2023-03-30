@@ -108,44 +108,6 @@ namespace ProductivityTools.GetTask3.Sdk
             this.token = idToken;
         }
 
-        //private void SetNewAccessToken()
-        //{
-        //    Log("token is empty need to call identity server");
-        //    var client = new System.Net.Http.HttpClient();
-
-        //    var disco = client.GetDiscoveryDocumentAsync("https://identityserver.productivitytools.tech:8010/").Result;
-        //    Log($"Discovery server{disco}");
-        //    if (disco.IsError)
-        //    {
-        //        Log(disco.Error);
-        //    }
-
-        //    Log("GetTask3Cmdlet secret");
-        //    Log(ClientSecret);
-
-        //    var tokenResponse = client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-        //    {
-        //        Address = disco.TokenEndpoint,
-
-        //        ClientId = "GetTask3Cmdlet",
-        //        ClientSecret = ClientSecret,
-        //        Scope = "GetTask3.API"
-        //    }).Result;
-
-        //    Log("Token response pw:");
-        //    Log(tokenResponse.AccessToken);
-        //    Log(tokenResponse.Error);
-
-        //    if (tokenResponse.IsError)
-        //    {
-        //        Log(tokenResponse.Error);
-        //    }
-
-        //    Log(tokenResponse.Json.ToString());
-        //    token = tokenResponse.AccessToken;
-        //}
-
-
 
         public async Task<T> Post2<T>(string controller, string action, object obj)
         {

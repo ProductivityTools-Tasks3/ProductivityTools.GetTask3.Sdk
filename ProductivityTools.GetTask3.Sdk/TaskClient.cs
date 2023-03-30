@@ -34,5 +34,11 @@ namespace ProductivityTools.GetTask3.Sdk
             var rootElement = await GetTaskHttpClient.Post2<ElementView>(Consts.Task, Consts.ThisWeekFinishedList, new ListRequest() { ElementId = currentNode, Path = path });
             return rootElement;
         }
+
+        public async Task<ElementView> GetThisWeekFinishedForUser(int? currentNode, string path, string userEmail)
+        {
+            var rootElement = await GetTaskHttpClient.Post2<ElementView>(Consts.Task, Consts.ThisWeekFinishedListForUser, new ListRequest() { ElementId = currentNode, Path = path, UserEmail= userEmail });
+            return rootElement;
+        }
     }
 }

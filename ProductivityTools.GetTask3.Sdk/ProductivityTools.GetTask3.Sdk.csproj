@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>0.0.14</Version>
+    <Version>0.0.15</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>TaskList.png</PackageIcon>
     <RepositoryUrl>https://github.com/ProductivityTools-Tasks3/ProductivityTools.GetTask3.Sdk</RepositoryUrl>
@@ -19,9 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="6.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="ProductivityTools.GetTask3.Contract" Version="0.0.19" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ProductivityTools.GetTask3.Contract" Version="0.0.21" />
     <PackageReference Include="ProductivityTools.MasterConfiguration" Version="2.0.5" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.19.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.27.0" />
   </ItemGroup>
 </Project>
