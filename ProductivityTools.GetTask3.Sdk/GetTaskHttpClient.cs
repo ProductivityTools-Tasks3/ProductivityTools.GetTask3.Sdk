@@ -64,9 +64,11 @@ namespace ProductivityTools.GetTask3.Sdk
             HttpResponseMessage response = await HttpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                var resultAsString = await response.Content.ReadAsStringAsync();
+                //var resultAsString = await response.Content.ReadAsStringAsync();
+                var rawResponse = await response.Content.ReadAsStringAsync();
+                var token = JsonConvert.DeserializeObject<string>(rawResponse);
                 // T result = JsonConvert.DeserializeObject<T>(resultAsString);
-                return resultAsString;
+                return token;
             }
             throw new Exception(response.ReasonPhrase);
         }
@@ -111,7 +113,7 @@ namespace ProductivityTools.GetTask3.Sdk
 
         public async Task<T> Post2<T>(string controller, string action, object obj)
         {
-            Log($"Performing Post under address {URL}");
+            Log($"Performing Post under address {URL} action {action}, controler {controller}");
              var client = new System.Net.Http.HttpClient(new LoggingHandler(new HttpClientHandler(), Log));
             client.BaseAddress = new Uri(URL + controller + "/");
             client.DefaultRequestHeaders.Accept.Clear();
