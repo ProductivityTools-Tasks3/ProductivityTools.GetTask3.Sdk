@@ -27,7 +27,7 @@ namespace ProductivityTools.GetTask3.Sdk
         {
             this.URL = url;
             this.Log = log;
-            this.WebApiKey= webapikey; 
+            this.WebApiKey= "AIzaSyA5rZKf-dVt6mKGvMHa9pgJ_P6gohdmLeo"; 
         }
 
         private string token;
@@ -87,13 +87,15 @@ namespace ProductivityTools.GetTask3.Sdk
             try
             {
                 HttpResponseMessage response = await HttpClient.PostAsync(url, content);
+                var responseContent = await response.Content.ReadAsStringAsync();
+
                 if (response.IsSuccessStatusCode)
                 {
                     var resultAsString = await response.Content.ReadAsStringAsync();
                     TokenResponse result = JsonConvert.DeserializeObject<TokenResponse>(resultAsString);
                     return result.idToken;
                 }
-                throw new Exception(response.ReasonPhrase);
+                throw new Exception(response.ReasonPhrase + responseContent);
             }
             catch (Exception)
             {
