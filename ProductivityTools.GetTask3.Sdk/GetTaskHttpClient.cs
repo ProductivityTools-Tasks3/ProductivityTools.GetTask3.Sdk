@@ -36,8 +36,10 @@ namespace ProductivityTools.GetTask3.Sdk
             get
             {
                 Console.WriteLine("GetToken");
+                Log("GetToken from logging");
                 if (string.IsNullOrEmpty(token))
                 {
+                    Log("Tokei is empty");
                     SetNewAccessToken();
                 }
                 else
@@ -61,12 +63,14 @@ namespace ProductivityTools.GetTask3.Sdk
             HttpClient.DefaultRequestHeaders.Accept.Clear();
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            Log("GetCustom Token from logging");
             HttpResponseMessage response = await HttpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 //var resultAsString = await response.Content.ReadAsStringAsync();
                 var rawResponse = await response.Content.ReadAsStringAsync();
                 var token = JsonConvert.DeserializeObject<string>(rawResponse);
+                Log("Token" + token);
                 // T result = JsonConvert.DeserializeObject<T>(resultAsString);
                 return token;
             }
