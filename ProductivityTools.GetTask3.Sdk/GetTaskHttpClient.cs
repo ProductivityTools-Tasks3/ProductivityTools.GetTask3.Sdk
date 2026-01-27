@@ -37,6 +37,7 @@ namespace ProductivityTools.GetTask3.Sdk
             {
                 Console.WriteLine("GetToken");
                 Log("GetToken from logging");
+                Console.WriteLine("XXXXXXXXXXX");
                 if (string.IsNullOrEmpty(token))
                 {
                     Log("Tokei is empty");
