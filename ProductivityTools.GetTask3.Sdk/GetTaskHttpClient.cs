@@ -37,7 +37,6 @@ namespace ProductivityTools.GetTask3.Sdk
             {
                 Console.WriteLine("GetToken");
                 Log("GetToken from logging");
-                Console.WriteLine("XXXXXXXXXXX");
                 if (string.IsNullOrEmpty(token))
                 {
                     Log("Token is empty");
@@ -60,19 +59,19 @@ namespace ProductivityTools.GetTask3.Sdk
         {
             var HttpClient = new HttpClient();
             Uri url = new Uri($"{this.URL}CustomToken/Get");
-            Log("Logging call under url:" + url.ToString());
+            Log("[GetCustomToken] Logging call under url:" + url.ToString());
 
             HttpClient.DefaultRequestHeaders.Accept.Clear();
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            Log("GetCustom Token from logging");
+            Log("[GetCustomToken] GetAsync");
             HttpResponseMessage response = await HttpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 //var resultAsString = await response.Content.ReadAsStringAsync();
                 var rawResponse = await response.Content.ReadAsStringAsync();
                 var token = JsonConvert.DeserializeObject<string>(rawResponse);
-                Log("Logging token:" + token);
+                Log("[GetCustomToken] Token:" + token);
                 // T result = JsonConvert.DeserializeObject<T>(resultAsString);
                 return token;
             }
@@ -80,7 +79,7 @@ namespace ProductivityTools.GetTask3.Sdk
         }
         async Task<string> GetIdToken(string custom_token)
         {
-            Log("Logging GetIdToken");
+            Log("[GetIdToken] GetIdToken");
             var HttpClient = new HttpClient();
             Uri url = new Uri($"https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key={this.WebApiKey}");
 
@@ -90,8 +89,8 @@ namespace ProductivityTools.GetTask3.Sdk
             object obj = new { token = custom_token, returnSecureToken = true };
             var dataAsString = JsonConvert.SerializeObject(obj);
             var content = new StringContent(dataAsString, Encoding.UTF8, "application/json");
-            Log("Callfnieshed");
-            Log("Params" + dataAsString);
+            Log("[GetIdToken] Call finished");
+            Log("[GetIdToken] Params" + dataAsString);
             try
             {
                 HttpResponseMessage response = await HttpClient.PostAsync(url, content);
@@ -100,11 +99,11 @@ namespace ProductivityTools.GetTask3.Sdk
                 if (response.IsSuccessStatusCode)
                 {
                     var resultAsString = await response.Content.ReadAsStringAsync();
-                    Log("Response:" + resultAsString);
+                    Log("[GetIdToken] Response:" + resultAsString);
                     TokenResponse result = JsonConvert.DeserializeObject<TokenResponse>(resultAsString);
                     return result.idToken;
                 }
-                Log("Error response:" + responseContent);
+                Log("[GetIdToken] Error response:" + responseContent);
                 throw new Exception(response.ReasonPhrase + responseContent);
             }
             catch (Exception)
@@ -117,7 +116,7 @@ namespace ProductivityTools.GetTask3.Sdk
 
         private void SetNewAccessToken()
         {
-            Log("SetNewAccessToken");
+            Log("[SetNewAccessToken] SetNewAccessToken");
             string customToken = GetCustomToken().Result;
             string idToken = GetIdToken(customToken).Result;
             this.token = idToken;
@@ -126,7 +125,7 @@ namespace ProductivityTools.GetTask3.Sdk
 
         public async Task<T> Post2<T>(string controller, string action, object obj)
         {
-            Log($"Performing Post under address {URL} action {action}, controler {controller}");
+            Log($"[Post2] Performing Post under address {URL} action {action}, controler {controller}");
              var client = new System.Net.Http.HttpClient(new LoggingHandler(new HttpClientHandler(), Log));
             client.BaseAddress = new Uri(URL + controller + "/");
             client.DefaultRequestHeaders.Accept.Clear();
