@@ -35,11 +35,11 @@ namespace ProductivityTools.GetTask3.Sdk
         {
             get
             {
-                Console.WriteLine("GetToken");
-                Log("GetToken from logging");
+                Console.WriteLine("[Token] GetToken");
+                Log("[Token] GetToken from logging");
                 if (string.IsNullOrEmpty(token))
                 {
-                    Log("Token is empty");
+                    Log("[Token] Token is empty");
                     SetNewAccessToken();
                 }
                 else
