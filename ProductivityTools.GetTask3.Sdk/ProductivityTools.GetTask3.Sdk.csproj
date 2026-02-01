@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>0.0.25</Version>
+    <Version>0.0.26</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>TaskList.png</PackageIcon>
     <RepositoryUrl>https://github.com/ProductivityTools-Tasks3/ProductivityTools.GetTask3.Sdk</RepositoryUrl>
@@ -18,6 +18,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="3.4.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="ProductivityTools.GetTask3.Contract" Version="0.0.25" />

@@ -1,4 +1,7 @@
-﻿using IdentityModel.Client;
+﻿using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Http;
+using IdentityModel.Client;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using ProductivityTools.MasterConfiguration;
@@ -19,6 +22,7 @@ namespace ProductivityTools.GetTask3.Sdk
         //static string URL = "http://localhost:5513/api/";// Consts.EndpointAddress;
 
 
+
         private readonly string URL;
         private readonly Action<String> Log;
         string WebApiKey;
@@ -27,7 +31,12 @@ namespace ProductivityTools.GetTask3.Sdk
         {
             this.URL = url;
             this.Log = log;
-            this.WebApiKey= "AIzaSyA5rZKf-dVt6mKGvMHa9pgJ_P6gohdmLeo"; 
+            //this.WebApiKey = "AIzaSyA5rZKf-dVt6mKGvMHa9pgJ_P6gohdmLeo";
+            string serviceAccountJson = @"";
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.GetApplicationDefault(),
+            });
         }
 
         private string token;
@@ -55,6 +64,12 @@ namespace ProductivityTools.GetTask3.Sdk
             }
         }
 
+        private async Task<string> GetCustomToken2()
+        {
+            string uid = "SDK";
+            string customToken = await FirebaseAdmin.Auth.FirebaseAuth.DefaultInstance.CreateCustomTokenAsync(uid);
+            return customToken;
+        }
         private async Task<string> GetCustomToken()
         {
             var HttpClient = new HttpClient();
@@ -91,6 +106,8 @@ namespace ProductivityTools.GetTask3.Sdk
             var content = new StringContent(dataAsString, Encoding.UTF8, "application/json");
             Log("[GetIdToken] Call finished");
             Log("[GetIdToken] Params" + dataAsString);
+            Log("[GetIdToken] Url" + url);
+            Log("[GetIdToken] Url" + this.WebApiKey);
             try
             {
                 HttpResponseMessage response = await HttpClient.PostAsync(url, content);
@@ -111,13 +128,13 @@ namespace ProductivityTools.GetTask3.Sdk
 
                 throw;
             }
-         
+
         }
 
         private void SetNewAccessToken()
         {
             Log("[SetNewAccessToken] SetNewAccessToken");
-            string customToken = GetCustomToken().Result;
+            string customToken = GetCustomToken2().Result;
             string idToken = GetIdToken(customToken).Result;
             this.token = idToken;
         }
@@ -126,7 +143,7 @@ namespace ProductivityTools.GetTask3.Sdk
         public async Task<T> Post2<T>(string controller, string action, object obj)
         {
             Log($"[Post2] Performing Post under address {URL} action {action}, controler {controller}");
-             var client = new System.Net.Http.HttpClient(new LoggingHandler(new HttpClientHandler(), Log));
+            var client = new System.Net.Http.HttpClient(new LoggingHandler(new HttpClientHandler(), Log));
             client.BaseAddress = new Uri(URL + controller + "/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

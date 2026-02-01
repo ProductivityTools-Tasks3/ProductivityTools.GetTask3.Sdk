@@ -16,7 +16,10 @@ Nuget allows to access to the GetTask3 API.
 
 To initialize we need to provide: 
 - API address
-- Firebase application key 
+- Firebase account key (in the file ptprojectsweb-firebase-adminsdk.json)
+![](Images/ServiceAccount.png)
+
+- Firebase service account key
 
 ![](Images/2022-06-20-08-01-20.png)
 

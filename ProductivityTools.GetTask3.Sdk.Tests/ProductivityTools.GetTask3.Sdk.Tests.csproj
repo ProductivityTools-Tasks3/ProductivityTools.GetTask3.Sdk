@@ -24,11 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.Example.json">
+    <Compile Update="UnitTest1.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="appsettings.json">
-      <Generator></Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
