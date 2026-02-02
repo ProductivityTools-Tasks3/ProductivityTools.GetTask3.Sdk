@@ -31,7 +31,7 @@ namespace ProductivityTools.GetTask3.Sdk
         {
             this.URL = url;
             this.Log = log;
-            //this.WebApiKey = "AIzaSyA5rZKf-dVt6mKGvMHa9pgJ_P6gohdmLeo";
+            this.WebApiKey = webapikey;
             string serviceAccountJson = @"";
             FirebaseApp.Create(new AppOptions()
             {

@@ -14,9 +14,24 @@
 
 Nuget allows to access to the GetTask3 API.
 
-To initialize we need to provide: 
-- API address
-- Firebase account key (in the file ptprojectsweb-firebase-adminsdk.json)
+Nuget requires two configurations to work:
+
+- API address - server api address
+- Firebase account key (in the file ptprojectsweb-firebase-adminsdk.json).
+
+In the cloud file is not required as GCP will find service account automatically. 
+Local development requires the file to be placed in the project folder and environment variable to be set.
+
+It is used in this code:
+```
+FirebaseApp.Create(new AppOptions()
+    {
+        Credential = GoogleCredential.GetApplicationDefault(),
+    });
+```
+
+For local puproses file can be downloaded from here:
+
 ![](Images/ServiceAccount.png)
 
 - Firebase service account key
