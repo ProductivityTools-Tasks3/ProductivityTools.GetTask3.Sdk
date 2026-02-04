@@ -32,11 +32,14 @@ namespace ProductivityTools.GetTask3.Sdk
             this.URL = url;
             this.Log = log;
             this.WebApiKey = webapikey;
-            string serviceAccountJson = @"";
-            FirebaseApp.Create(new AppOptions()
+            //string serviceAccountJson = @"";
+            if (FirebaseApp.DefaultInstance == null)
             {
-                Credential = GoogleCredential.GetApplicationDefault(),
-            });
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.GetApplicationDefault(),
+                });
+            }
         }
 
         private string token;
