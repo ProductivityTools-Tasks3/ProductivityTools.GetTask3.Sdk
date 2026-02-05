@@ -101,14 +101,13 @@ namespace ProductivityTools.GetTask3.Sdk
         async Task<string> GetIdToken(string custom_token)
         {
             Log("[GetIdToken] GetIdToken");
-            var HttpClient = new HttpClient();
+            using var handler = new HttpClientHandler();
+            using var httpClient = new HttpClient(handler);
             Uri url = new Uri($"https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key={this.WebApiKey}");
+          
 
-            HttpClient.DefaultRequestHeaders.Accept.Clear();
-            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            object obj = new { token = custom_token, returnSecureToken = true };
-            var dataAsString = JsonConvert.SerializeObject(obj);
+            object payload = new { token = custom_token, returnSecureToken = true };
+            var dataAsString = JsonConvert.SerializeObject(payload);
             var content = new StringContent(dataAsString, Encoding.UTF8, "application/json");
             Log("[GetIdToken] Call finished");
             Log("[GetIdToken] Params: " + dataAsString);
@@ -116,11 +115,11 @@ namespace ProductivityTools.GetTask3.Sdk
             Log("[GetIdToken] WebApiKey: " + this.WebApiKey);
             try
             {
-                HttpResponseMessage testresponse = await HttpClient.GetAsync("http://www.wp.pl");
+                HttpResponseMessage testresponse = await httpClient.GetAsync("http://www.wp.pl");
                 Log("[GetIdToken] test response suceed");
 
 
-                HttpResponseMessage response = await HttpClient.PostAsync(url, content);
+                HttpResponseMessage response = await httpClient.PostAsync(url, content);
                 Log("[GetIdToken] response awaited");
                 var responseContent = await response.Content.ReadAsStringAsync();
 
