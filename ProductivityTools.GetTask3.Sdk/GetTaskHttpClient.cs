@@ -118,6 +118,21 @@ namespace ProductivityTools.GetTask3.Sdk
                 HttpResponseMessage testresponse = await httpClient.GetAsync("http://www.wp.pl");
                 Log("[GetIdToken] test response suceed");
 
+                var testData = new
+                {
+                    title = "Testowy Post",
+                    body = "To jest treść wysłana z mojej aplikacji",
+                    userId = 1
+                };
+
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(testData);
+                var content1 = new StringContent(json, Encoding.UTF8, "application/json");
+
+                string TestUrl = "https://jsonplaceholder.typicode.com/posts";
+                HttpResponseMessage testresponsepost = await httpClient.PostAsync(TestUrl, content1);
+                Log("[GetIdToken] test response suceed");
+
+
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, content);
                 Log("[GetIdToken] response awaited");
