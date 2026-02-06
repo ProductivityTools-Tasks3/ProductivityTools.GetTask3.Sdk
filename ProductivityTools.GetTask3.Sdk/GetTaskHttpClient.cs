@@ -116,7 +116,7 @@ namespace ProductivityTools.GetTask3.Sdk
             Log("[GetIdToken] WebApiKey: " + this.WebApiKey);
             try
             {
-                HttpResponseMessage testresponse = await HttpClient.GetAsync("www.wp.pl");
+                HttpResponseMessage testresponse = await HttpClient.GetAsync("http://www.wp.pl");
                 Log("[GetIdToken] test response suceed");
 
 
