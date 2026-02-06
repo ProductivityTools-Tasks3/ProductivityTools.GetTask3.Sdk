@@ -69,8 +69,11 @@ namespace ProductivityTools.GetTask3.Sdk
 
         private async Task<string> GetCustomToken2()
         {
+            Log("[GetCustomToken2] Enter");
             string uid = "SDK";
             string customToken = await FirebaseAdmin.Auth.FirebaseAuth.DefaultInstance.CreateCustomTokenAsync(uid);
+            Log("[GetCustomToken2] exit");
+
             return customToken;
         }
         private async Task<string> GetCustomToken()
@@ -108,12 +111,17 @@ namespace ProductivityTools.GetTask3.Sdk
             var dataAsString = JsonConvert.SerializeObject(obj);
             var content = new StringContent(dataAsString, Encoding.UTF8, "application/json");
             Log("[GetIdToken] Call finished");
-            Log("[GetIdToken] Params" + dataAsString);
-            Log("[GetIdToken] Url" + url);
-            Log("[GetIdToken] Url" + this.WebApiKey);
+            Log("[GetIdToken] Params: " + dataAsString);
+            Log("[GetIdToken] Url: " + url);
+            Log("[GetIdToken] WebApiKey: " + this.WebApiKey);
             try
             {
+                HttpResponseMessage testresponse = await HttpClient.GetAsync("www.wp.pl");
+                Log("[GetIdToken] test response suceed");
+
+
                 HttpResponseMessage response = await HttpClient.PostAsync(url, content);
+                Log("[GetIdToken] response awaited");
                 var responseContent = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
@@ -126,9 +134,9 @@ namespace ProductivityTools.GetTask3.Sdk
                 Log("[GetIdToken] Error response:" + responseContent);
                 throw new Exception(response.ReasonPhrase + responseContent);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Log("[GetIdToken] Error response:" + ex.Message);
                 throw;
             }
 
