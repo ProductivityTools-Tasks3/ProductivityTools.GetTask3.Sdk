@@ -137,6 +137,10 @@ namespace ProductivityTools.GetTask3.Sdk
             catch (Exception ex)
             {
                 Log("[GetIdToken] Error response:" + ex.Message);
+                if (ex.InnerException != null)
+                {
+                    Log("[GetIdToken] Inner exception:" + ex.InnerException.Message);
+                }
                 throw;
             }
 
