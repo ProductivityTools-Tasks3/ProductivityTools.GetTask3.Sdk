@@ -116,7 +116,7 @@ namespace ProductivityTools.GetTask3.Sdk
             try
             {
                 HttpResponseMessage testresponse = await httpClient.GetAsync("http://www.wp.pl");
-                Log("[GetIdToken] test response suceed");
+                Log("[GetIdToken] test get response suceed");
 
                 var testData = new
                 {
@@ -130,7 +130,9 @@ namespace ProductivityTools.GetTask3.Sdk
 
                 string TestUrl = "https://jsonplaceholder.typicode.com/posts";
                 HttpResponseMessage testresponsepost = await httpClient.PostAsync(TestUrl, content1);
-                Log("[GetIdToken] test response suceed");
+                Log("[GetIdToken] test post response suceed");
+                var responseContent1 = await testresponsepost.Content.ReadAsStringAsync();
+                Log("[GetIdToken] test post response content:" + responseContent1);
 
 
 
