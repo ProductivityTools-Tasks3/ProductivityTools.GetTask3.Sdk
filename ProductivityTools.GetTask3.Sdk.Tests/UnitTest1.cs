@@ -14,8 +14,8 @@ namespace ProductivityTools.GetTask3.Sdk.Tests
             var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false);
             var configuration = builder.Build();
             var webapikey = configuration["WebApiKey"];
-            var url = "https://tasks-api.productivitytools.top/api/";
-            //var url = "http://localhost:5513/api/";
+            //var url = "https://tasks-api.productivitytools.top/api/";
+            var url = "http://localhost:5513/api/";
             
           var taskClient = new TaskClient(url, webapikey, (x) => { System.Console.WriteLine(x); });
             
