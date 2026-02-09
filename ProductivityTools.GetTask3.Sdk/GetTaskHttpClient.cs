@@ -76,28 +76,28 @@ namespace ProductivityTools.GetTask3.Sdk
 
             return customToken;
         }
-        private async Task<string> GetCustomToken()
-        {
-            var HttpClient = new HttpClient();
-            Uri url = new Uri($"{this.URL}CustomToken/Get");
-            Log("[GetCustomToken] Logging call under url:" + url.ToString());
+        //private async Task<string> GetCustomToken()
+        //{
+        //    var HttpClient = new HttpClient();
+        //    Uri url = new Uri($"{this.URL}CustomToken/Get");
+        //    Log("[GetCustomToken] Logging call under url:" + url.ToString());
 
-            HttpClient.DefaultRequestHeaders.Accept.Clear();
-            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    HttpClient.DefaultRequestHeaders.Accept.Clear();
+        //    HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            Log("[GetCustomToken] GetAsync");
-            HttpResponseMessage response = await HttpClient.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-            {
-                //var resultAsString = await response.Content.ReadAsStringAsync();
-                var rawResponse = await response.Content.ReadAsStringAsync();
-                var token = JsonConvert.DeserializeObject<string>(rawResponse);
-                Log("[GetCustomToken] Token:" + token);
-                // T result = JsonConvert.DeserializeObject<T>(resultAsString);
-                return token;
-            }
-            throw new Exception(response.ReasonPhrase);
-        }
+        //    Log("[GetCustomToken] GetAsync");
+        //    HttpResponseMessage response = await HttpClient.GetAsync(url);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        //var resultAsString = await response.Content.ReadAsStringAsync();
+        //        var rawResponse = await response.Content.ReadAsStringAsync();
+        //        var token = JsonConvert.DeserializeObject<string>(rawResponse);
+        //        Log("[GetCustomToken] Token:" + token);
+        //        // T result = JsonConvert.DeserializeObject<T>(resultAsString);
+        //        return token;
+        //    }
+        //    throw new Exception(response.ReasonPhrase);
+        //}
         async Task<string> GetIdToken(string custom_token)
         {
             Log("[GetIdToken] GetIdToken");
@@ -115,26 +115,7 @@ namespace ProductivityTools.GetTask3.Sdk
             Log("[GetIdToken] WebApiKey: " + this.WebApiKey);
             try
             {
-                HttpResponseMessage testresponse = await httpClient.GetAsync("http://www.wp.pl");
-                Log("[GetIdToken] test get response suceed");
-
-                var testData = new
-                {
-                    title = "Testowy Post",
-                    body = "To jest treść wysłana z mojej aplikacji",
-                    userId = 1
-                };
-
-                string json = Newtonsoft.Json.JsonConvert.SerializeObject(testData);
-                var content1 = new StringContent(json, Encoding.UTF8, "application/json");
-
-                string TestUrl = "https://jsonplaceholder.typicode.com/posts";
-                HttpResponseMessage testresponsepost = await httpClient.PostAsync(TestUrl, content1);
-                Log("[GetIdToken] test post response suceed");
-                var responseContent1 = await testresponsepost.Content.ReadAsStringAsync();
-                Log("[GetIdToken] test post response content:" + responseContent1);
-
-
+                await DebugMethods(httpClient);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, content);
                 Log("[GetIdToken] response awaited");
@@ -160,6 +141,30 @@ namespace ProductivityTools.GetTask3.Sdk
                 throw;
             }
 
+        }
+
+        private async Task DebugMethods(HttpClient httpClient)
+        {
+            return;
+            HttpResponseMessage testresponse = await httpClient.GetAsync("http://www.wp.pl");
+            Log("[GetIdToken] test get response suceed");
+
+            var testData = new
+            {
+                title = "Testowy Post",
+                body = "To jest treść wysłana z mojej aplikacji",
+                userId = 1
+            };
+
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(testData);
+            var content1 = new StringContent(json, Encoding.UTF8, "application/json");
+
+            string TestUrl = "https://jsonplaceholder.typicode.com/posts";
+            Log("[GetIdToken] test post response try");
+            HttpResponseMessage testresponsepost = await httpClient.PostAsync(TestUrl, content1);
+            Log("[GetIdToken] test post response suceed");
+            var responseContent1 = await testresponsepost.Content.ReadAsStringAsync();
+            Log("[GetIdToken] test post response content:" + responseContent1);
         }
 
         private void SetNewAccessToken()
